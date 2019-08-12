@@ -68,6 +68,19 @@ package object avro {
    */
   @Experimental
   def to_avro(data: Column): Column = {
-    new Column(CatalystDataToAvro(data.expr))
+    new Column(CatalystDataToAvro(data.expr, None))
+  }
+
+  /**
+   * Converts a column into binary of avro format.
+   *
+   * @param data the data column.
+   * @param jsonFormatSchema user-specified output avro schema in JSON string format.
+   *
+   * @since 2.4.4
+   */
+  @Experimental
+  def to_avro(data: Column, jsonFormatSchema: String): Column = {
+    new Column(CatalystDataToAvro(data.expr, Some(jsonFormatSchema)))
   }
 }
