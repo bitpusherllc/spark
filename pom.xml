@@ -25,7 +25,7 @@
     <version>18</version>
   </parent>
   <groupId>org.apache.spark</groupId>
-  <artifactId>spark-parent_2.11</artifactId>
+  <artifactId>spark-parent_2.12</artifactId>
   <version>2.4.5-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Spark Project Parent POM</name>
@@ -122,7 +122,7 @@
     <protobuf.version>2.5.0</protobuf.version>
     <yarn.version>${hadoop.version}</yarn.version>
     <flume.version>1.6.0</flume.version>
-    <zookeeper.version>3.4.6</zookeeper.version>
+    <zookeeper.version>3.4.14</zookeeper.version>
     <curator.version>2.6.0</curator.version>
     <hive.group>org.spark-project.hive</hive.group>
     <!-- Version used in Maven Hive dependency -->
@@ -155,8 +155,8 @@
     <commons.math3.version>3.4.1</commons.math3.version>
     <!-- managed up from 3.2.1 for SPARK-11652 -->
     <commons.collections.version>3.2.2</commons.collections.version>
-    <scala.version>2.11.12</scala.version>
-    <scala.binary.version>2.11</scala.binary.version>
+    <scala.version>2.12.8</scala.version>
+    <scala.binary.version>2.12</scala.binary.version>
     <codehaus.jackson.version>1.9.13</codehaus.jackson.version>
     <fasterxml.jackson.version>2.6.7</fasterxml.jackson.version>
     <fasterxml.jackson.databind.version>2.6.7.1</fasterxml.jackson.databind.version>
@@ -589,7 +589,7 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-all</artifactId>
-        <version>4.1.39.Final</version>
+        <version>4.1.41.Final</version>
       </dependency>
       <dependency>
         <groupId>io.netty</groupId>
@@ -2722,7 +2722,7 @@
       <properties>
         <hadoop.version>3.1.0</hadoop.version>
         <curator.version>2.12.0</curator.version>
-        <zookeeper.version>3.4.9</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
       </properties>
     </profile>
 
@@ -2796,7 +2796,7 @@
     <profile>
       <id>scala-2.12</id>
       <properties>
-        <scala.version>2.12.10</scala.version>
+        <scala.version>2.12.8</scala.version>
         <scala.binary.version>2.12</scala.binary.version>
       </properties>
       <build>
