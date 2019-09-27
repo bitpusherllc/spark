@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.spark</groupId>
     <artifactId>spark-parent_2.12</artifactId>
-    <version>2.4.4-bitpusher1</version>
+    <version>2.4.4-bitpusher2</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -94,6 +94,11 @@
     <dependency>
       <groupId>org.scalanlp</groupId>
       <artifactId>breeze_${scala.binary.version}</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>edu.emory.mathcs</groupId>
+      <artifactId>JTransforms</artifactId>
+      <version>2.4</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>

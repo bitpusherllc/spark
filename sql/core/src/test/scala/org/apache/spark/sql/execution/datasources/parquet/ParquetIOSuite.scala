@@ -485,6 +485,18 @@ class ParquetIOSuite extends QueryTest with ParquetTest with SharedSQLContext {
     }
   }
 
+  test("SPARK-6330 regression test") {
+    // In 1.3.0, save to fs other than file: without configuring core-site.xml would get:
+    // IllegalArgumentException: Wrong FS: hdfs://..., expected: file:///
+    intercept[Throwable] {
+      spark.read.parquet("file:///nonexistent")
+    }
+    val errorMessage = intercept[Throwable] {
+      spark.read.parquet("hdfs://nonexistent.host.name.local.")
+    }.toString
+    assert(errorMessage.contains("UnknownHostException"))
+  }
+
   test("SPARK-7837 Do not close output writer twice when commitTask() fails") {
     withSQLConf(SQLConf.FILE_COMMIT_PROTOCOL_CLASS.key ->
         classOf[SQLHadoopMapReduceCommitProtocol].getCanonicalName) {
