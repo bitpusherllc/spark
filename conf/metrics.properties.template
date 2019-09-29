@@ -96,8 +96,6 @@
 #   dmax      0          Lifetime in seconds of metrics (0 never expired)
 #   mode      multicast  Ganglia network mode ('unicast' or 'multicast')
 
-# org.apache.spark.metrics.sink.JmxSink
-
 # org.apache.spark.metrics.sink.MetricsServlet
 #   Name:     Default:   Description:
 #   path      VARIES*    Path prefix from the web server root
@@ -127,9 +125,6 @@
 #   prefix    EMPTY STRING  Prefix to prepend to metric name
 
 ## Examples
-# Enable JmxSink for all instances by class name
-#*.sink.jmx.class=org.apache.spark.metrics.sink.JmxSink
-
 # Enable ConsoleSink for all instances by class name
 #*.sink.console.class=org.apache.spark.metrics.sink.ConsoleSink
 
