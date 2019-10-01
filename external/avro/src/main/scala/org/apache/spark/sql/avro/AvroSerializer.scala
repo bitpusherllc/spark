@@ -27,8 +27,8 @@ import org.apache.avro.LogicalTypes.{TimestampMicros, TimestampMillis}
 import org.apache.avro.Schema
 import org.apache.avro.Schema.Type
 import org.apache.avro.Schema.Type._
+import org.apache.avro.generic.GenericData
 import org.apache.avro.generic.GenericData.{EnumSymbol, Fixed, Record}
-import org.apache.avro.generic.GenericData.Record
 import org.apache.avro.util.Utf8
 
 import org.apache.spark.sql.catalyst.InternalRow
@@ -172,6 +172,11 @@ class AvroSerializer(rootCatalystType: DataType, rootAvroType: Schema, nullable:
         val numFields = st.length
         (getter, ordinal) => structConverter(getter.getStruct(ordinal, numFields))
 
+      case (st: StructType, UNION) =>
+        val unionConverter = newUnionConverter(st, avroType)
+        val numFields = st.length
+        (getter, ordinal) => unionConverter(getter.getStruct(ordinal, numFields))
+
       case (MapType(kt, vt, valueContainsNull), MAP) if kt == StringType =>
         val valueConverter = newConverter(
           vt, resolveNullableType(avroType.getValueType, valueContainsNull))
@@ -217,6 +222,28 @@ class AvroSerializer(rootCatalystType: DataType, rootAvroType: Schema, nullable:
           result.put(i, null)
         } else {
           result.put(i, fieldConverters(i).apply(row, i))
+        }
+        i += 1
+      }
+      result
+  }
+
+  private def newUnionConverter(
+      catalystStruct: StructType, avroUnion: Schema): InternalRow => Any = {
+    if (avroUnion.getType != UNION || avroUnion.getTypes.size() != catalystStruct.length) {
+      throw new IncompatibleSchemaException(s"Cannot convert Catalyst type $catalystStruct to " +
+        s"Avro type $avroUnion.")
+    }
+    val optionConverters = catalystStruct.zip(avroUnion.getTypes.asScala).map {
+      case (f1, f2) => newConverter(f1.dataType, f2)
+    }
+    val numOptions = catalystStruct.length
+    (row: InternalRow) =>
+      var result: Any = null
+      var i = 0
+      while (i < numOptions) {
+        if (!row.isNullAt(i)) {
+          result = optionConverters(i).apply(row, i)
         }
         i += 1
       }
