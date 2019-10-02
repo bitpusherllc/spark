@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.spark</groupId>
   <artifactId>spark-parent_2.12</artifactId>
-  <version>2.4.4-bitpusher2</version>
+  <version>2.4.4-bitpusher3</version>
   <packaging>pom</packaging>
   <name>Spark Project Parent POM</name>
   <url>http://spark.apache.org/</url>
@@ -118,7 +118,7 @@
     <sbt.project.name>spark</sbt.project.name>
     <slf4j.version>1.7.28</slf4j.version>
     <log4j.version>1.2.17</log4j.version>
-    <hadoop.version>2.9.2</hadoop.version>
+    <hadoop.version>2.8.5-amzn-4</hadoop.version>
     <protobuf.version>2.5.0</protobuf.version>
     <yarn.version>${hadoop.version}</yarn.version>
     <flume.version>1.9.0</flume.version>
@@ -134,7 +134,7 @@
     <orc.version>1.5.6</orc.version>
     <orc.classifier>nohive</orc.classifier>
     <hive.parquet.version>1.6.0</hive.parquet.version>
-    <jetty.version>9.4.20.v20190813</jetty.version>
+    <jetty.version>9.4.21.v20190926</jetty.version>
     <javaxservlet.version>4.0.1</javaxservlet.version>
     <chill.version>0.9.3-bitpusher1</chill.version>
     <ivy.version>2.4.0</ivy.version>
@@ -234,6 +234,17 @@
       <id>local-repo</id>
       <name>Local Repository</name>
       <url>file:///home/ec2-user/m2</url>
+    </repository>
+    <repository>
+      <id>emr-5.27.0-artifacts</id>
+      <name>EMR 5.27.0 Releases Repository</name>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <url>https://s3.us-east-1.amazonaws.com/us-east-1-emr-artifacts/emr-5.27.0/repos/maven/</url>
     </repository>
     <repository>
       <id>central</id>
@@ -595,7 +606,7 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-all</artifactId>
-        <version>4.1.41.Final</version>
+        <version>4.1.42.Final</version>
       </dependency>
       <dependency>
         <groupId>io.netty</groupId>
