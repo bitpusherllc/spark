@@ -561,7 +561,8 @@ class ParquetIOSuite extends QueryTest with ParquetTest with SharedSparkSession 
     val errorMessage = intercept[Throwable] {
       spark.read.parquet("hdfs://nonexistent")
     }.toString
-    assert(errorMessage.contains("UnknownHostException"))
+    // In Hadoop 2.8.5, this is now back to IllegalArgumentException because it lacks a filename portion.
+    assert(errorMessage.contains("IllegalArgumentException"))
   }
 
   test("SPARK-7837 Do not close output writer twice when commitTask() fails") {
