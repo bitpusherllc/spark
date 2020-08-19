@@ -26,7 +26,7 @@
   </parent>
   <groupId>org.apache.spark</groupId>
   <artifactId>spark-parent_2.12</artifactId>
-  <version>3.0.0-bp1</version>
+  <version>3.0.0-bp2</version>
   <packaging>pom</packaging>
   <name>Spark Project Parent POM</name>
   <url>http://spark.apache.org/</url>
@@ -117,7 +117,7 @@
     <sbt.project.name>spark</sbt.project.name>
     <slf4j.version>1.7.30</slf4j.version>
     <log4j.version>1.2.17</log4j.version>
-    <hadoop.version>2.8.5-amzn-4</hadoop.version>
+    <hadoop.version>2.8.5-amzn-6</hadoop.version>
     <protobuf.version>2.5.0</protobuf.version>
     <yarn.version>${hadoop.version}</yarn.version>
     <zookeeper.version>3.4.14</zookeeper.version>
@@ -250,15 +250,15 @@
   </properties>
   <repositories>
     <repository>
-      <id>emr-5.27.0-artifacts</id>
-      <name>EMR 5.27.0 Releases Repository</name>
+      <id>emr-5.30.x-artifacts</id>
+      <name>EMR 5.30.x Releases Repository</name>
       <releases>
         <enabled>true</enabled>
       </releases>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-      <url>https://s3.us-east-1.amazonaws.com/us-east-1-emr-artifacts/emr-5.27.0/repos/maven/</url>
+      <url>https://s3.us-east-1.amazonaws.com/us-east-1-emr-artifacts/emr-5.30.0/repos/maven/</url>
     </repository>
     <repository>
       <id>gcs-maven-central-mirror</id>
